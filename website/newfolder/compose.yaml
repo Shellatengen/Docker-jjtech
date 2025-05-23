@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - db-data:/usr/share/nginx/html:ro
+    networks:
+      - prestige
+
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  prestige:
+    driver: bridge
+    

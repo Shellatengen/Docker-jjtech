@@ -1,14 +1,32 @@
-version: '3.11'
+
 services:
-  redis:
-    image: redis
+  jenkins:
+    image: jenkins/jenkins:lts
+  
+    privileged: true
     ports:
-      - 6379:6379
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins-data:/var/jenkins_home
+    networks:
+      - jenkins
 
-  db:
-    image: postgres 
+  database:
+    image: postgres
+    container_name: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - database
 
-  app:
-    build: .
+volumes:
+  jenkins-data:
+  postgres-data:
+
+networks:
+  jenkins:
+  database:
+name: prosperous

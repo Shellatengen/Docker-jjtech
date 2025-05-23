@@ -83,7 +83,6 @@ docker push <image-name:tag>  ### TO push image to docker registry
 docker pull <image-name:tag> ### TO pull image from docker registry
 
 
-
 ###################################
 ## Docker volume
 
@@ -91,7 +90,7 @@ docker volume create <volume name>
 
 docker run -v <host-path:container-path> <image>
 
-docker run --name website -v c:/Users/Anselme/Documents/Demos/docker/website:/usr/share/nginx/html -d -p 9000:80 nginx
+docker run --name website -v c:/Users/Anselme/OneDrive/New folder/Documents/JJTECH/Docker/Docker-jjtech/simple-app2:/usr -d -p 9000:80 nginx
 
 docker run -d -p 9000:80 -v c:/Users/Anselme/Documents/Demos/docker/website:/usr/share/nginx/html -v c:/Users/Anselme/Documents/Demos/docker/logs:/var/log/nginx --name nginx-with-my-content nginx
 
@@ -109,6 +108,8 @@ Docker network
 docker network create <name of network>
 docker run --name <name of container> -d -p 8080:80 --network <name of network> nginx
 
+docker inspect <container ID>  # Get network details for container b and c
+
 docker exec -it <name of container> bash 
 
 # Update container: 
@@ -118,11 +119,11 @@ docker exec -it <name of container> bash
 
 # ping <ip of other container>
 
-172.21.0.2  > Container B
+172.19.0.3  > Container B
 
-172.20.0.2  > Container A
+172.22.0.2  > Container C
 
-172.20.0.3  > Container C
+172.20.0.1  > Container A
 
 ###########################################
 Docker compose
@@ -132,5 +133,6 @@ docker-compose up -d      # To start containers in detached mode
 docker-compose down       # To stop containers
 docker-compose ps        # To list running containers
 docker-compose logs       # To view logs of running containers
-docker-compose rm -f      # To remove containers
-doc
+docker-compose rm -f      # To remove containers without stopping them
+
+
